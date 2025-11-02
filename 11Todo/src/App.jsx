@@ -3,29 +3,36 @@ import { useState } from 'react'
 
 function App() {
   const [task,settask] = useState('');
-  const list = document.getElementById('list-item');
   const addtask= (event) => {
    
     event.preventDefault();
      if(task == ''){
       return;
     }
+
+    const list = document.getElementById('list-item');
+
     let li = document.createElement('li');
     li.innerHTML=`<span>${task}</span>`
-    li.textContent=task;
+
     const button = document.createElement('button');
     button.textContent='Delete';
     button.addEventListener('click',function(){
       li.classList.toggle("line-through");
     })
-    list.appendChild(li);
     li.appendChild(button);
+
+    
+    list.appendChild(li);
+    savetask();
     settask('');
+    console.log(list)
 
-
-  }
-  function store(){
-    localStorage.setItem('item',JSON.stringify());
+    function savetask(){
+      localStorage.setItem('list',JSON.stringify('list'));
+      const todos = JSON.parse(localStorage.getItem("todos")); // Retrieves as array
+console.log(todos);
+    }
   }
 
   return (
